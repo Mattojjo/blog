@@ -1,0 +1,19 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Getting Started with Web Development",
+            "description": "Learn the fundamentals of HTML, CSS, and JavaScript to build your first website."
+        },
+        {
+            "id": 2,
+            "title": "Understanding REST APIs",
+            "description": "A comprehensive guide to designing and consuming RESTful web services."
+        },
+        {
+            "id": 3,
+            "title": "Introduction to React",
+            "description": "Discover how to build dynamic user interfaces with React components and state management."
+        }
+    ]
+}

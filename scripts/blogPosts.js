@@ -1,18 +1,19 @@
-function blogPosts() {
+async function blogPosts() {
     const postsContainer = document.getElementById('posts');
 
-    const posts = [
-        { title: 'First Post', content: 'This is the first post on my blog!' },
-        { title: 'Second Post', content: 'This is the second post on my blog!' },
-        { title: 'Third Post', content: 'This is the third post on my blog!' }
-    ];
-    
-    posts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.class = 'post';
-        postElement.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
-        postsContainer.appendChild(postElement);
+        try {
+            const response = await fetch('./posts.json');
+            const data = await response.json();
+            
+            data.posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `<h2>${post.title}</h2><p>${post.description}</p>`;
+                postsContainer.appendChild(postElement);
     });
-}
+        } catch (e) {
+            console.log("Error", e);
+        }
+    }
 
 window.onload = blogPosts;  

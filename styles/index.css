@@ -11,3 +11,18 @@ body {
     border: 1px solid white;
     border-radius: 2rem;
 }
+
+#posts {
+    width: 80%;
+    margin: 3rem auto;
+    border: 1px solid white;
+    border-radius: 2rem;
+    padding: 2rem 1rem;
+}
+
+.post {
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
