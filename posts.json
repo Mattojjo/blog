@@ -14,6 +14,156 @@
             "id": 3,
             "title": "Introduction to React",
             "description": "Discover how to build dynamic user interfaces with React components and state management."
+        },
+        {
+            "id": 4,
+            "title": "Mastering CSS Grid",
+            "description": "Learn how to create complex layouts with CSS Grid for responsive web design."
+        },
+        {
+            "id": 5,
+            "title": "Node.js for Backend Development",
+            "description": "Build scalable server-side applications using Node.js and Express."
+        },
+        {
+            "id": 6,
+            "title": "Database Design Fundamentals",
+            "description": "Understand relational databases, normalization, and SQL query optimization."
+        },
+        {
+            "id": 7,
+            "title": "Testing in JavaScript",
+            "description": "Master unit testing and integration testing with Jest and other testing frameworks."
+        },
+        {
+            "id": 8,
+            "title": "Git and Version Control",
+            "description": "Essential guide to Git workflows, branching strategies, and collaboration."
+        },
+        {
+            "id": 9,
+            "title": "Security Best Practices",
+            "description": "Learn how to protect your applications from common vulnerabilities and attacks."
+        },
+        {
+            "id": 10,
+            "title": "TypeScript Advanced Patterns",
+            "description": "Explore advanced TypeScript features for building type-safe applications."
+        },
+        {
+            "id": 11,
+            "title": "Deploying to the Cloud",
+            "description": "Deploy your applications to AWS, Azure, or other cloud platforms."
+        },
+        {
+            "id": 12,
+            "title": "Performance Optimization",
+            "description": "Improve application speed through caching, code splitting, and lazy loading."
+        },
+        {
+            "id": 13,
+            "title": "Mobile Development with React Native",
+            "description": "Build cross-platform mobile applications using React Native and JavaScript."
+        },
+        {
+            "id": 14,
+            "title": "GraphQL Fundamentals",
+            "description": "Learn how to build efficient APIs with GraphQL for flexible data querying."
+        },
+        {
+            "id": 15,
+            "title": "Docker and Containerization",
+            "description": "Containerize your applications with Docker for consistent deployment across environments."
+        },
+        {
+            "id": 16,
+            "title": "Kubernetes Orchestration",
+            "description": "Master container orchestration with Kubernetes for scalable microservices."
+        },
+        {
+            "id": 17,
+            "title": "CI/CD Pipelines",
+            "description": "Automate testing and deployment with continuous integration and continuous deployment."
+        },
+        {
+            "id": 18,
+            "title": "Machine Learning with JavaScript",
+            "description": "Integrate machine learning models into web applications using TensorFlow.js."
+        },
+        {
+            "id": 19,
+            "title": "Web Accessibility Standards",
+            "description": "Build inclusive web applications that are accessible to all users."
+        },
+        {
+            "id": 20,
+            "title": "Progressive Web Apps",
+            "description": "Create fast, reliable web apps that work offline with service workers."
+        },
+        {
+            "id": 21,
+            "title": "State Management with Redux",
+            "description": "Manage complex application state using Redux and middleware patterns."
+        },
+        {
+            "id": 22,
+            "title": "WebSocket Communication",
+            "description": "Build real-time applications with WebSockets for instant data updates."
+        },
+        {
+            "id": 23,
+            "title": "API Rate Limiting",
+            "description": "Implement rate limiting and throttling to protect your APIs from abuse."
+        },
+        {
+            "id": 24,
+            "title": "Authentication and Authorization",
+            "description": "Secure your applications with OAuth 2.0, JWT, and session management."
+        },
+        {
+            "id": 25,
+            "title": "Microservices Architecture",
+            "description": "Design and build scalable systems using microservices design patterns."
+        },
+        {
+            "id": 26,
+            "title": "API Documentation with OpenAPI",
+            "description": "Create comprehensive API documentation using OpenAPI and Swagger."
+        },
+        {
+            "id": 27,
+            "title": "Error Handling and Logging",
+            "description": "Implement robust error handling and structured logging for debugging."
+        },
+        {
+            "id": 28,
+            "title": "Monitoring and Observability",
+            "description": "Monitor application health and performance with logs, metrics, and traces."
+        },
+        {
+            "id": 29,
+            "title": "Serverless Computing",
+            "description": "Build applications with AWS Lambda and other serverless platforms."
+        },
+        {
+            "id": 30,
+            "title": "Content Management Systems",
+            "description": "Headless CMS solutions for managing content independently from presentation."
+        },
+        {
+            "id": 31,
+            "title": "Email Integration",
+            "description": "Send transactional and marketing emails from your applications reliably."
+        },
+        {
+            "id": 32,
+            "title": "Payment Processing",
+            "description": "Integrate payment gateways like Stripe and PayPal into e-commerce applications."
+        },
+        {
+            "id": 33,
+            "title": "Web Scraping Techniques",
+            "description": "Extract data from websites ethically using web scraping tools and libraries."
         }
     ]
 }
