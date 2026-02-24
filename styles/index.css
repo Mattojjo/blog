@@ -12,7 +12,19 @@ body {
     border-radius: 2rem;
 }
 
-#posts {
+
+.post {
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    transition: 500ms;
+} .post:hover {
+    background-color: #333;
+    transition: 500ms;
+}
+
+.content {
     width: 80%;
     margin: 3rem auto;
     border: 1px solid white;
@@ -20,9 +32,35 @@ body {
     padding: 2rem 1rem;
 }
 
-.post {
-    border: 1px solid white;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin-bottom: 2rem;
+.postButtons {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.postButtons:hover:not(:disabled) {
+    background-color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.postButtons:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.postButtons:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #999;
+}
+
+#nextButton,
+#previousButton {
+    margin: 0 0.5rem;
 }
