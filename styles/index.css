@@ -1,53 +1,149 @@
+/* ========== Global Styles ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: black;
-    color: white;
-}
-
-.header {
-    width: 80%;
-    text-align: center;
-    font-size: large;
-    margin: auto;
-    border: 1px solid white;
-    border-radius: 2rem;
-}
-
-
-.post {
-    border: 1px solid white;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    transition: 500ms;
-} .post:hover {
-    background-color: #333;
-    transition: 500ms;
-}
-
-.content {
-    width: 80%;
-    margin: 3rem auto;
-    border: 1px solid white;
-    border-radius: 2rem;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
     padding: 2rem 1rem;
 }
 
+/* ========== Root & Layout ========== */
+#root {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ========== Header ========== */
+.header {
+    background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+    padding: 3rem 2rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(30, 144, 255, 0.2);
+    animation: slideDown 0.6s ease-out;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== Posts Container ========== */
+#posts {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* ========== Post Cards ========== */
+.post {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    position: relative;
+}
+
+.post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.1), transparent);
+    transition: left 500ms ease;
+}
+
+.post:hover::before {
+    left: 100%;
+}
+
+.post:hover {
+    transform: translateY(-8px);
+    border-color: rgba(30, 144, 255, 0.6);
+    box-shadow: 0 12px 32px rgba(30, 144, 255, 0.2);
+}
+
+.post h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1e90ff;
+    transition: color 300ms ease;
+}
+
+.post:hover h2 {
+    color: #00bfff;
+}
+
+.post p {
+    color: #b0b0b0;
+    line-height: 1.8;
+    word-wrap: break-word;
+}
+
+/* ========== Buttons Container ========== */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* ========== Post Buttons ========== */
 .postButtons {
-    padding: 0.75rem 1.5rem;
-    background-color: white;
-    color: black;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+    color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 500ms ease;
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+}
+
+.postButtons::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 600ms, height 600ms;
+}
+
+.postButtons:active::before {
+    width: 300px;
+    height: 300px;
 }
 
 .postButtons:hover:not(:disabled) {
-    background-color: #fff;
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4);
 }
 
 .postButtons:active:not(:disabled) {
@@ -57,10 +153,102 @@ body {
 .postButtons:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: #999;
+    background: linear-gradient(135deg, #555 0%, #333 100%);
+    box-shadow: none;
+}
+
+.postButtons:disabled:hover {
+    transform: none;
 }
 
 #nextButton,
 #previousButton {
-    margin: 0 0.5rem;
+    min-width: 120px;
+}
+
+/* ========== Animations ========== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .header {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .post {
+        padding: 1.25rem;
+    }
+
+    .post h2 {
+        font-size: 1.25rem;
+    }
+
+    .postButtons {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    #posts {
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header {
+        padding: 1.5rem 1rem;
+        border-radius: 1rem;
+    }
+
+    .post {
+        padding: 1rem;
+    }
+
+    .post h2 {
+        font-size: 1.1rem;
+    }
+
+    .post p {
+        font-size: 0.95rem;
+    }
+
+    .postButtons {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    #posts {
+        gap: 1rem;
+    }
 }
