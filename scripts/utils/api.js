@@ -1,7 +1,14 @@
 let posts = [];
 
+export function shouldFetch() {
+  return !document.hidden;
+}
+
 export async function fetchData() {
   try {
+    if (!shouldFetch()) {
+      return;
+    }
     const response = await fetch("http://127.0.0.1:8000/items/");
     posts = await response.json(); 
   } catch (error) {
