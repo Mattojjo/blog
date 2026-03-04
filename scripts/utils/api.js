@@ -1,4 +1,5 @@
 let posts = [];
+let newPost = {};
 
 export async function fetchData() {
   try {
@@ -7,6 +8,23 @@ export async function fetchData() {
   } catch (error) {
     console.log("Error fetching items:", error);
   }
+}
+
+export function addData() {
+  fetch("http://127.0.0.1:8000/items/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newPost),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      posts.push(data);
+    })
+    .catch((error) => {
+      console.log("Error adding item:", error);
+    });
 }
 
 export function getPosts() {
