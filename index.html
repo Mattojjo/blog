@@ -9,8 +9,31 @@
 <body>
     <div id="root">
         <div class="header"><h1>Round-D-Blog</h1></div>
+        
+        <div id="topButtonContainer" class="button-container">
+            <button id="addButton" class="postButtons">Add Post</button>
+        </div>
+
+        <div id="postsSection">
+            <div id="posts"></div>
+
+            <div id="paginationContainer" class="button-container is-hidden">
+                <button id="previousButton" class="postButtons">Previous</button>
+                <button id="nextButton" class="postButtons">Next</button>
+            </div>
+        </div>
     </div>
-  
+
+    <div id="postModal" class="modal hidden" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button id="modalClose" class="modal-close" type="button" aria-label="Close">×</button>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div class="modal-actions">
+                <button id="modalDeleteButton" class="postButtons" type="button">Delete Post</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-<script type="module" src="./scripts/blogPosts.js"></script>
+<script type="module" src="scripts/script.js"></script>
