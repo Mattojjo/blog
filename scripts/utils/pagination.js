@@ -13,7 +13,13 @@ const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalDeleteButton = document.getElementById("modalDeleteButton");
 
-const testPost = {title: "sdhsdju", description:"ghjghgh"}
+const addModal = document.getElementById("addModal");
+const addModalClose = document.getElementById("addModalClose");
+const addModalCancel = document.getElementById("addModalCancel");
+const addModalSave = document.getElementById("addModalSave");
+const postTitleInput = document.getElementById("postTitleInput");
+const postDescriptionInput = document.getElementById("postDescriptionInput");
+
 let selectedPostId = null;
 let lastFocusedElement = null;
 
@@ -53,6 +59,36 @@ function closeModal() {
   selectedPostId = null;
   postModal.classList.add("hidden");
   postModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  if (lastFocusedElement && lastFocusedElement.isConnected) {
+    lastFocusedElement.focus();
+  }
+  lastFocusedElement = null;
+}
+
+function openAddModal() {
+  if (!addModal) {
+    return;
+  }
+  lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  postTitleInput.value = "";
+  postDescriptionInput.value = "";
+  addModal.classList.remove("hidden");
+  addModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  postTitleInput.focus();
+}
+
+function closeAddModal() {
+  if (!addModal) {
+    return;
+  }
+  const activeElement = document.activeElement;
+  if (activeElement instanceof HTMLElement && addModal.contains(activeElement)) {
+    activeElement.blur();
+  }
+  addModal.classList.add("hidden");
+  addModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
   if (lastFocusedElement && lastFocusedElement.isConnected) {
     lastFocusedElement.focus();
@@ -116,13 +152,50 @@ if (postModal) {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    closeModal();
+    const postModalHidden = postModal?.classList.contains("hidden");
+    const addModalHidden = addModal?.classList.contains("hidden");
+    
+    if (!postModalHidden) {
+      closeModal();
+    } else if (!addModalHidden) {
+      closeAddModal();
+    }
   }
 });
 
 if (addButton) {
-  addButton.addEventListener("click", () => {
-    addData(testPost);
+  addButton.addEventListener("click", openAddModal);
+}
+
+if (addModalClose) {
+  addModalClose.addEventListener("click", closeAddModal);
+}
+
+if (addModalCancel) {
+  addModalCancel.addEventListener("click", closeAddModal);
+}
+
+if (addModal) {
+  addModal.addEventListener("click", (event) => {
+    if (event.target === addModal) {
+      closeAddModal();
+    }
+  });
+}
+
+if (addModalSave) {
+  addModalSave.addEventListener("click", async () => {
+    const title = postTitleInput.value.trim();
+    const description = postDescriptionInput.value.trim();
+
+    if (!title) {
+      alert("Please enter a title");
+      return;
+    }
+
+    const newPost = { title, description };
+    await addData(newPost);
+    closeAddModal();
     renderPosts();
   });
 }

@@ -9,21 +9,25 @@ export async function fetchData() {
   }
 }
 
-export function addData(obj) {
-  fetch("http://127.0.0.1:8000/items/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(obj),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      posts.push(data);
-    })
-    .catch((error) => {
-      console.log("Error adding item:", error);
+export async function addData(obj) {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/items/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
     });
+
+    if (!response.ok) {
+      throw new Error(`Add failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    posts.push(data);
+  } catch (error) {
+    console.log("Error adding item:", error);
+  }
 }
 
 export function getPosts() {

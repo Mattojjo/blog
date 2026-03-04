@@ -34,6 +34,27 @@
             </div>
         </div>
     </div>
+
+    <div id="addModal" class="modal hidden" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="addModalTitle">
+            <button id="addModalClose" class="modal-close" type="button" aria-label="Close">×</button>
+            <h2 id="addModalTitle">Add New Post</h2>
+            <form id="addPostForm" class="form-group">
+                <div class="form-field">
+                    <label for="postTitleInput">Title</label>
+                    <input id="postTitleInput" type="text" placeholder="Enter post title" required>
+                </div>
+                <div class="form-field">
+                    <label for="postDescriptionInput">Description</label>
+                    <textarea id="postDescriptionInput" placeholder="Enter post description" rows="5"></textarea>
+                </div>
+            </form>
+            <div class="modal-actions">
+                <button id="addModalCancel" class="postButtons" type="button">Cancel</button>
+                <button id="addModalSave" class="postButtons" type="button">Save Post</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script type="module" src="scripts/script.js"></script>
