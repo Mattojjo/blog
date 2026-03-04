@@ -30,15 +30,18 @@ export function getPosts() {
   return posts;
 }
 
-export function deletePost(id) {
-  fetch(`http://127.0.0.1:8000/items/${id}`, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then(() => {
-      posts = posts.filter((post) => post.id !== id);
-    })
-    .catch((error) => {
-      console.log("Error deleting item:", error);
+export async function deletePost(id) {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/items/${id}`, {
+      method: "DELETE",
     });
+
+    if (!response.ok) {
+      throw new Error(`Delete failed with status ${response.status}`);
+    }
+
+    posts = posts.filter((post) => post.id !== id);
+  } catch (error) {
+    console.log("Error deleting item:", error);
+  }
 }

@@ -33,10 +33,15 @@ body {
 	line-height: 1.2;
 }
 
+#postsSection {
+	display: grid;
+	gap: 0.75rem;
+}
+
 #posts {
 	display: grid;
 	gap: 1rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 0;
 }
 
 .post {
@@ -70,6 +75,10 @@ body {
 	flex-wrap: wrap;
 }
 
+.is-hidden {
+	visibility: hidden;
+}
+
 .postButtons {
 	padding: 0.6rem 1.2rem;
 	background: #1e90ff;
@@ -97,7 +106,7 @@ body {
 #previousButton,
 #preciousButton,
 #addButton,
-#deleteButton {
+#modalDeleteButton {
 	min-width: 110px;
 }
 
@@ -135,6 +144,12 @@ body {
 
 .modal-content p {
 	color: #c7c7c7;
+}
+
+.modal-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
 }
 
 .modal-close {

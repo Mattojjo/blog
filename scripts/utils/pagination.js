@@ -3,17 +3,19 @@ import { getPosts, addData, deletePost } from "./api.js";
 let start = 0;
 const end = 10;
 const postsContainer = document.getElementById("posts");
+const paginationContainer = document.getElementById("paginationContainer");
 const previousButton = document.getElementById("previousButton");
 const nextButton = document.getElementById("nextButton");
 const addButton = document.getElementById("addButton");
-const deleteButton = document.getElementById("deleteButton");
 const postModal = document.getElementById("postModal");
 const modalClose = document.getElementById("modalClose");
 const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
+const modalDeleteButton = document.getElementById("modalDeleteButton");
 
 const testPost = {title: "sdhsdju", description:"ghjghgh"}
-const testDelete = 5;
+let selectedPostId = null;
+let lastFocusedElement = null;
 
 function getPostTitle(post) {
   return post.title ?? post.name ?? "Untitled";
@@ -23,20 +25,39 @@ function openModal(post) {
   if (!postModal || !modalTitle || !modalDescription) {
     return;
   }
+  lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  selectedPostId = post.id ?? null;
   modalTitle.textContent = getPostTitle(post);
   modalDescription.textContent = post.description ?? "No description";
+  if (modalDeleteButton) {
+    modalDeleteButton.disabled = selectedPostId == null;
+  }
   postModal.classList.remove("hidden");
   postModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+  if (modalDeleteButton && !modalDeleteButton.disabled) {
+    modalDeleteButton.focus();
+  } else if (modalClose) {
+    modalClose.focus();
+  }
 }
 
 function closeModal() {
   if (!postModal) {
     return;
   }
+  const activeElement = document.activeElement;
+  if (activeElement instanceof HTMLElement && postModal.contains(activeElement)) {
+    activeElement.blur();
+  }
+  selectedPostId = null;
   postModal.classList.add("hidden");
   postModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+  if (lastFocusedElement && lastFocusedElement.isConnected) {
+    lastFocusedElement.focus();
+  }
+  lastFocusedElement = null;
 }
 
 function renderPosts(arg) {
@@ -53,6 +74,10 @@ function renderPosts(arg) {
   postsContainer.innerHTML = currentArray.map((post, index) => 
     `<div class="post" data-post-index="${start + index}"><h2>${getPostTitle(post)}</h2><p>${post.description ?? ""}</p></div>`
   ).join("");
+
+  if (paginationContainer) {
+    paginationContainer.classList.remove("is-hidden");
+  }
   
   nextButton.disabled = start + end >= posts.length;
   previousButton.disabled = start <= 0;
@@ -102,9 +127,20 @@ if (addButton) {
   });
 }
 
-if (deleteButton) {
-  deleteButton.addEventListener("click", () => {
-    deletePost(testDelete);
+if (modalDeleteButton) {
+  modalDeleteButton.addEventListener("click", async () => {
+    if (selectedPostId == null) {
+      return;
+    }
+
+    await deletePost(selectedPostId);
+    closeModal();
+
+    const posts = getPosts();
+    if (start >= posts.length && start > 0) {
+      start = Math.max(0, start - end);
+    }
+
     renderPosts();
   });
 }
