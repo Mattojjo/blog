@@ -17,6 +17,7 @@ body {
 #root {
 	max-width: 900px;
 	margin: 0 auto;
+	width: 100%;
 }
 
 .header {
@@ -36,6 +37,9 @@ body {
 #postsSection {
 	display: grid;
 	gap: 0.75rem;
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
 }
 
 #posts {
@@ -76,7 +80,7 @@ body {
 }
 
 .is-hidden {
-	visibility: hidden;
+	display: none;
 }
 
 .postButtons {
@@ -104,7 +108,6 @@ body {
 
 #nextButton,
 #previousButton,
-#preciousButton,
 #addButton,
 #modalDeleteButton {
 	min-width: 110px;
@@ -119,10 +122,14 @@ body {
 	justify-content: center;
 	padding: 1rem;
 	z-index: 1000;
+	opacity: 1;
+	transition: opacity 0.15s ease;
 }
 
 .modal.hidden {
 	display: none;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .modal-content {
@@ -133,6 +140,8 @@ body {
 	border-radius: 0.75rem;
 	padding: 1.25rem;
 	color: #e6e6e6;
+	will-change: transform;
+	transform: translateZ(0);
 }
 
 .modal-content h2 {
@@ -149,7 +158,49 @@ body {
 .modal-actions {
 	display: flex;
 	justify-content: flex-end;
+	gap: 0.75rem;
 	margin-top: 1rem;
+}
+
+.form-group {
+	display: grid;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.form-field {
+	display: grid;
+	gap: 0.4rem;
+}
+
+.form-field label {
+	color: #5fb3ff;
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+
+.form-field input,
+.form-field textarea {
+	background: #0f1419;
+	border: 1px solid rgba(30, 144, 255, 0.35);
+	color: #e6e6e6;
+	padding: 0.6rem 0.8rem;
+	border-radius: 0.5rem;
+	font-family: inherit;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+	outline: none;
+	border-color: rgba(30, 144, 255, 0.7);
+	box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.1);
+}
+
+.form-field textarea {
+	resize: vertical;
 }
 
 .modal-close {
@@ -166,6 +217,29 @@ body {
 
 body.modal-open {
 	overflow: hidden;
+}
+
+.spinner {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40px;
+	height: 40px;
+	border: 3px solid rgba(30, 144, 255, 0.2);
+	border-top: 3px solid #1e90ff;
+	border-radius: 50%;
+	animation: spin 0.8s linear infinite;
+	z-index: 999;
+}
+
+.spinner.hidden {
+	display: none;
+}
+
+@keyframes spin {
+	0% { transform: translate(-50%, -50%) rotate(0deg); }
+	100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @media (max-width: 640px) {
