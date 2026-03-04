@@ -101,6 +101,58 @@ body {
 	min-width: 110px;
 }
 
+.modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	z-index: 1000;
+}
+
+.modal.hidden {
+	display: none;
+}
+
+.modal-content {
+	position: relative;
+	width: min(640px, 100%);
+	background: #1b1f2a;
+	border: 1px solid rgba(30, 144, 255, 0.35);
+	border-radius: 0.75rem;
+	padding: 1.25rem;
+	color: #e6e6e6;
+}
+
+.modal-content h2 {
+	font-size: 1.25rem;
+	color: #5fb3ff;
+	margin-bottom: 0.75rem;
+	padding-right: 2rem;
+}
+
+.modal-content p {
+	color: #c7c7c7;
+}
+
+.modal-close {
+	position: absolute;
+	right: 0.6rem;
+	top: 0.4rem;
+	background: transparent;
+	border: none;
+	color: #e6e6e6;
+	font-size: 1.4rem;
+	cursor: pointer;
+	line-height: 1;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
 @media (max-width: 640px) {
 	body {
 		padding: 1rem 0.75rem;

@@ -1,11 +1,45 @@
-import { getPosts } from "./api.js";
-import { postsContainer, previousButton, nextButton } from "./dom.js";
+import { getPosts, addData, deletePost } from "./api.js";
 
 let start = 0;
 const end = 10;
-let currentArray = [];
+const postsContainer = document.getElementById("posts");
+const previousButton = document.getElementById("previousButton");
+const nextButton = document.getElementById("nextButton");
+const addButton = document.getElementById("addButton");
+const deleteButton = document.getElementById("deleteButton");
+const postModal = document.getElementById("postModal");
+const modalClose = document.getElementById("modalClose");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
 
-function arraySlice(arg) {
+const testPost = {title: "sdhsdju", description:"ghjghgh"}
+const testDelete = 5;
+
+function getPostTitle(post) {
+  return post.title ?? post.name ?? "Untitled";
+}
+
+function openModal(post) {
+  if (!postModal || !modalTitle || !modalDescription) {
+    return;
+  }
+  modalTitle.textContent = getPostTitle(post);
+  modalDescription.textContent = post.description ?? "No description";
+  postModal.classList.remove("hidden");
+  postModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+
+function closeModal() {
+  if (!postModal) {
+    return;
+  }
+  postModal.classList.add("hidden");
+  postModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
+function renderPosts(arg) {
   const posts = getPosts();
   if (arg === "previous") {
     start = Math.max(0, start - end);
@@ -14,42 +48,64 @@ function arraySlice(arg) {
       start += end;
     }
   }
-  return (currentArray = posts.slice(start, start + end));
+  
+  const currentArray = posts.slice(start, start + end);
+  postsContainer.innerHTML = currentArray.map((post, index) => 
+    `<div class="post" data-post-index="${start + index}"><h2>${getPostTitle(post)}</h2><p>${post.description ?? ""}</p></div>`
+  ).join("");
+  
+  nextButton.disabled = start + end >= posts.length;
+  previousButton.disabled = start <= 0;
 }
 
 export function load10(arg) {
-  arraySlice(arg);
-  currentArray.forEach((post) => {
-    const postElement = document.createElement("div");
-    postElement.className = "post";
-    postElement.innerHTML = `<h2>${post.title}</h2><p>${post.description}</p>`;
-    postsContainer.appendChild(postElement);
+  renderPosts(arg);
+}
+
+nextButton.addEventListener("click", () => renderPosts("next"));
+previousButton.addEventListener("click", () => renderPosts("previous"));
+postsContainer.addEventListener("click", (event) => {
+  const postElement = event.target.closest(".post");
+  if (!postElement) {
+    return;
+  }
+
+  const postIndex = Number(postElement.dataset.postIndex);
+  const post = getPosts()[postIndex];
+  if (post) {
+    openModal(post);
+  }
+});
+
+if (modalClose) {
+  modalClose.addEventListener("click", closeModal);
+}
+
+if (postModal) {
+  postModal.addEventListener("click", (event) => {
+    if (event.target === postModal) {
+      closeModal();
+    }
   });
 }
 
-function nextPosts() {
-  const posts = getPosts();
-  if (Array.isArray(posts) && posts.length) {
-    postsContainer.innerHTML = "";
-    load10("next");
-
-    nextButton.disabled = start >= posts.length;
-    previousButton.disabled = start <= 0;
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
   }
+});
+
+if (addButton) {
+  addButton.addEventListener("click", () => {
+    addData(testPost);
+    renderPosts();
+  });
 }
 
-function previousPosts() {
-  const posts = getPosts();
-  if (Array.isArray(posts) && posts.length) {
-    postsContainer.innerHTML = "";
-    load10("previous");
-
-    nextButton.disabled = start >= posts.length;
-    previousButton.disabled = start <= 0;
-  }
+if (deleteButton) {
+  deleteButton.addEventListener("click", () => {
+    deletePost(testDelete);
+    renderPosts();
+  });
 }
 
-nextButton.addEventListener("click", nextPosts);
-previousButton.addEventListener("click", previousPosts);
-
-export { nextPosts, previousPosts };

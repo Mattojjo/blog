@@ -1,5 +1,4 @@
 let posts = [];
-let newPost = {};
 
 export async function fetchData() {
   try {
@@ -10,13 +9,13 @@ export async function fetchData() {
   }
 }
 
-export function addData() {
+export function addData(obj) {
   fetch("http://127.0.0.1:8000/items/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(newPost),
+    body: JSON.stringify(obj),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -29,4 +28,17 @@ export function addData() {
 
 export function getPosts() {
   return posts;
+}
+
+export function deletePost(id) {
+  fetch(`http://127.0.0.1:8000/items/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then(() => {
+      posts = posts.filter((post) => post.id !== id);
+    })
+    .catch((error) => {
+      console.log("Error deleting item:", error);
+    });
 }
