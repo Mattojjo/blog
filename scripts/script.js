@@ -7,13 +7,13 @@ const loadingSpinner = document.getElementById("loadingSpinner");
   if (loadingSpinner) {
     loadingSpinner.classList.remove("hidden");
   }
-  
+
   await fetchData();
-  
+
   if (loadingSpinner) {
     loadingSpinner.classList.add("hidden");
   }
-  
+
   load10();
 })();
 

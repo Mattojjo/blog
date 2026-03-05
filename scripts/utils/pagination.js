@@ -106,14 +106,14 @@ function renderPosts(arg) {
       start += end;
     }
   }
-  
+
   const currentArray = posts.slice(start, start + end);
-  
+
   requestAnimationFrame(() => {
     postsContainer.innerHTML = currentArray.map((post, index) => {
       const cacheKey = `${post.id}`;
       if (!postCache.has(cacheKey)) {
-        postCache.set(cacheKey, 
+        postCache.set(cacheKey,
           `<div class="post" data-post-index="${start + index}"><h2>${getPostTitle(post)}</h2><p>${post.description ?? ""}</p></div>`
         );
       }
@@ -123,7 +123,7 @@ function renderPosts(arg) {
     if (paginationContainer) {
       paginationContainer.classList.remove("is-hidden");
     }
-    
+
     nextButton.disabled = start + end >= posts.length;
     previousButton.disabled = start <= 0;
   });
@@ -164,7 +164,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     const postModalHidden = postModal?.classList.contains("hidden");
     const addModalHidden = addModal?.classList.contains("hidden");
-    
+
     if (!postModalHidden) {
       closeModal();
     } else if (!addModalHidden) {

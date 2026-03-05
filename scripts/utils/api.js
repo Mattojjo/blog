@@ -10,9 +10,9 @@ export async function fetchData() {
       return;
     }
     const response = await fetch("http://127.0.0.1:8000/items/");
-    posts = await response.json(); 
+    posts = await response.json();
   } catch (error) {
-    console.log("Error fetching items:", error);
+    console.log("Error fetching items, Check the backend server", error);
   }
 }
 
@@ -33,7 +33,9 @@ export async function addData(obj) {
     const data = await response.json();
     posts.push(data);
   } catch (error) {
-    console.log("Error adding item:", error);
+    alert("Failed to add post. Please ensure the backend server is running.");
+    console.log("Failed to add post. Please ensure the backend server is running."
+      , "Error adding item:", error);
   }
 }
 
@@ -53,6 +55,6 @@ export async function deletePost(id) {
 
     posts = posts.filter((post) => post.id !== id);
   } catch (error) {
-    console.log("Error deleting item:", error);
+    console.log("Error deleting item, Check the backend server", error);
   }
 }
