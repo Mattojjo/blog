@@ -1,4 +1,4 @@
-import { getPosts, addData, deletePost } from "./api.js";
+import { getPosts, addData, deletePost, updatePost } from "./api.js";
 
 let start = 0;
 const end = 10;
@@ -13,6 +13,7 @@ const modalClose = document.getElementById("modalClose");
 const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalDeleteButton = document.getElementById("modalDeleteButton");
+const modalEditButton = document.getElementById("modalEditButton");
 
 const addModal = document.getElementById("addModal");
 const addModalClose = document.getElementById("addModalClose");
@@ -110,11 +111,17 @@ function renderPosts(arg) {
   const currentArray = posts.slice(start, start + end);
 
   requestAnimationFrame(() => {
+    let postDate = posts[0]?.date ? new Date(posts[0].date) : null;
     postsContainer.innerHTML = currentArray.map((post, index) => {
       const cacheKey = `${post.id}`;
       if (!postCache.has(cacheKey)) {
         postCache.set(cacheKey,
-          `<div class="post" data-post-index="${start + index}"><h2>${getPostTitle(post)}</h2><p>${post.description ?? ""}</p></div>`
+          `<div class="post" data-post-index="${start + index}">
+            <div>
+              <h2>${getPostTitle(post)}</h2>
+              <span class="date">Created: ${postDate ? postDate.toLocaleDateString() : ""}</span>
+            </div>          
+          <p>${post.description ?? ""}</p></div>`
         );
       }
       return postCache.get(cacheKey);

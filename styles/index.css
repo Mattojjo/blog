@@ -5,8 +5,8 @@
 }
 
 body {
-	background: #121212;
-	color: #e6e6e6;
+	background: #bfbfbf;
+	color: #000000;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 16px;
 	line-height: 1.6;
@@ -21,15 +21,14 @@ body {
 }
 
 .header {
-	background: #1e90ff;
+	background: #e8e5d3;
 	padding: 2rem 1.5rem;
-	border-radius: 1rem;
+	border-radius: 2rem;
 	text-align: center;
 	margin-bottom: 2rem;
 }
 
 .header h1 {
-	color: #ffffff;
 	font-size: clamp(1.8rem, 4vw, 2.8rem);
 	line-height: 1.2;
 }
@@ -49,27 +48,26 @@ body {
 }
 
 .post {
-	background: #1b1f2a;
-	border: 1px solid rgba(30, 144, 255, 0.35);
+	background: #e8e5d3; /* Updated background color */
 	border-radius: 0.75rem;
 	padding: 1rem;
-	transition: transform 0.2s ease, border-color 0.2s ease;
+	transition: transform 0.1s ease;
 }
 
 .post:hover {
-	transform: translateY(-2px);
-	border-color: rgba(30, 144, 255, 0.7);
+	transform: scale(1.05);
 }
 
 .post h2 {
-	font-size: 1.2rem;
-	color: #5fb3ff;
+	font-size: 1.4rem;
+  text-decoration: underline;
 	margin-bottom: 0.5rem;
 }
 
-.post p {
-	color: #c7c7c7;
+.date {
+  text-align: center;
 }
+
 
 .button-container {
 	display: flex;
@@ -85,8 +83,7 @@ body {
 
 .postButtons {
 	padding: 0.6rem 1.2rem;
-	background: #1e90ff;
-	color: #ffffff;
+	background: #8ba4bd;
 	border: none;
 	border-radius: 0.6rem;
 	font-size: 0.95rem;
@@ -135,25 +132,19 @@ body {
 .modal-content {
 	position: relative;
 	width: min(640px, 100%);
-	background: #1b1f2a;
-	border: 1px solid rgba(30, 144, 255, 0.35);
+	background: #e8e5d3; /* Updated background color */
 	border-radius: 0.75rem;
 	padding: 1.25rem;
-	color: #e6e6e6;
 	will-change: transform;
 	transform: translateZ(0);
 }
 
 .modal-content h2 {
 	font-size: 1.25rem;
-	color: #5fb3ff;
 	margin-bottom: 0.75rem;
 	padding-right: 2rem;
 }
 
-.modal-content p {
-	color: #c7c7c7;
-}
 
 .modal-actions {
 	display: flex;
@@ -174,16 +165,13 @@ body {
 }
 
 .form-field label {
-	color: #5fb3ff;
 	font-weight: 600;
 	font-size: 0.95rem;
 }
 
 .form-field input,
 .form-field textarea {
-	background: #0f1419;
-	border: 1px solid rgba(30, 144, 255, 0.35);
-	color: #e6e6e6;
+	
 	padding: 0.6rem 0.8rem;
 	border-radius: 0.5rem;
 	font-family: inherit;
@@ -195,7 +183,6 @@ body {
 .form-field input:focus,
 .form-field textarea:focus {
 	outline: none;
-	border-color: rgba(30, 144, 255, 0.7);
 	box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.1);
 }
 
@@ -209,7 +196,6 @@ body {
 	top: 0.4rem;
 	background: transparent;
 	border: none;
-	color: #e6e6e6;
 	font-size: 1.4rem;
 	cursor: pointer;
 	line-height: 1;
@@ -226,8 +212,7 @@ body.modal-open {
 	transform: translate(-50%, -50%);
 	width: 40px;
 	height: 40px;
-	border: 3px solid rgba(30, 144, 255, 0.2);
-	border-top: 3px solid #1e90ff;
+	border-top: 3px solid black;
 	border-radius: 50%;
 	animation: spin 0.8s linear infinite;
 	z-index: 999;
